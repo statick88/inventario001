@@ -1,5 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto
+from rest_framework import viewsets
+from .serializers import ProductoSerializer
+
+class ProductoViewSet(viewsets.ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
 
 productos = []
 
