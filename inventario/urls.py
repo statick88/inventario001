@@ -1,16 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
-
-from rest_framework import routers
-from productos.views import ProductoViewSet
-
-from rest_framework.permissions import AllowAny
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-
-# Creamos un enrutador para las vistas de Django REST Framework
-router = routers.DefaultRouter()
-router.register(r'productos', ProductoViewSet)
+from rest_framework.permissions import AllowAny
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -27,9 +19,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('productos.urls')),
-    path('api/', include(router.urls)),
-
+    path('api/', include("productos.urls")),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
